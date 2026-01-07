@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Info | JKT48 Protection</title>
+
+<style>
+:root{
+  --red:#c62828;
+  --dark:#7f0000;
+  --gray:#555;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
+  background:#fafafa;
+  color:#333;
+}
+
+/* ================= HEADER ================= */
+header{
+  position:sticky;
+  top:0;
+  background:#fff;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+}
+
+/* BRAND */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+  color:inherit;
+}
+
+.header-logo{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  overflow:hidden;
+}
+
+.header-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.brand-text{
+  line-height:1.2;
+}
+
+.brand-text .title{
+  font-weight:900;
+  font-size:20px;
+}
+
+.brand-text .subtitle{
+  font-size:12px;
+  letter-spacing:1px;
+  color:#777;
+}
+
+/* TITLE MOBILE */
+.header-title{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  font-weight:900;
+  color:var(--red);
+  letter-spacing:2px;
+  display:none;
+}
+
+/* NAV */
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:28px;
+}
+
+nav a{
+  text-decoration:none;
+  color:#333;
+  font-weight:600;
+}
+
+nav a:hover{color:var(--red)}
+
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  width:46px;
+  height:46px;
+  background:var(--red);
+  border-radius:10px;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  cursor:pointer;
+  z-index:2001;
+}
+
+.hamburger span{
+  width:22px;
+  height:3px;
+  background:#fff;
+  border-radius:2px;
+  transition:.3s ease;
+}
+
+.hamburger.active span:nth-child(1){
+  transform:translateY(9px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2){
+  opacity:0;
+}
+.hamburger.active span:nth-child(3){
+  transform:translateY(-9px) rotate(-45deg);
+}
+
+/* ================= CONTENT ================= */
+.container{
+  max-width:1000px;
+  margin:60px auto;
+  padding:0 20px;
+}
+
+.page-title{
+  font-size:34px;
+  font-weight:900;
+  color:var(--red);
+  margin-bottom:10px;
+}
+
+.page-desc{
+  color:var(--gray);
+  margin-bottom:40px;
+}
+
+.info-section{
+  background:#fff;
+  padding:32px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  margin-bottom:30px;
+}
+
+.info-section h2{
+  font-size:24px;
+  font-weight:900;
+  margin-bottom:14px;
+  color:var(--red);
+}
+
+.info-section p{
+  line-height:1.7;
+  margin-bottom:12px;
+  color:#444;
+}
+
+.info-section ul{
+  padding-left:20px;
+}
+
+.info-section li{
+  margin-bottom:10px;
+  line-height:1.6;
+}
+
+/* DISCLAIMER */
+.disclaimer{
+  background:#fff3cd;
+  border-left:6px solid #ff9800;
+  padding:20px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* FAQ */
+.faq-item{
+  border-bottom:1px solid #eee;
+}
+
+.faq-question{
+  padding:18px 10px;
+  cursor:pointer;
+  font-weight:700;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.faq-question span{
+  color:var(--red);
+  font-size:18px;
+}
+
+.faq-answer{
+  display:none;
+  padding:0 10px 18px;
+  color:#555;
+  line-height:1.6;
+}
+
+.faq-item.active .faq-answer{
+  display:block;
+}
+
+.faq-item.active .faq-question span{
+  transform:rotate(45deg);
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:var(--dark);
+  color:#fff;
+  text-align:center;
+  padding:24px;
+  font-size:14px;
+  margin-top:60px;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  .brand{display:none}
+  .header-title{display:block}
+  .hamburger{display:flex}
+
+  nav ul{
+    position:fixed;
+    top:0;
+    right:0;
+    width:260px;
+    height:100vh;
+    background:var(--red);
+    padding:100px 30px;
+    flex-direction:column;
+    gap:24px;
+    transform:translateX(100%);
+    transition:.35s ease;
+    z-index:1500;
+  }
+
+  nav ul.open{transform:translateX(0)}
+
+  nav a{
+    color:#fff;
+    font-size:18px;
+  }
+
+  .page-title{font-size:28px}
+  .info-section{padding:24px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <div class="header-logo">
+        <img src="logoindex.jpg" alt="Logo">
+      </div>
+      <div class="brand-text">
+        <div class="title">JKT48 Protection</div>
+        <div class="subtitle">OFFICIAL WEBSITE</div>
+      </div>
+    </a>
+
+    <div class="header-title">JKT48 PROTECTION</div>
+
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <ul id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="info.html">Info</a></li>
+        <li><a href="laporan.html">Laporan</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= INFO CONTENT (ISI DARI KAMU) ================= -->
+<div class="container">
+
+  <h1 class="page-title">Informasi Website</h1>
+  <p class="page-desc">Penjelasan mengenai tujuan, prinsip, dan kebijakan JKT48 Protection.</p>
+
+  <!-- Tentang Website -->
+  <div class="info-section">
+    <h2>Tentang Website</h2>
+    <p><strong>JKT48 Protection</strong> adalah platform dokumentasi dan informasi
+    berbasis komunitas yang bertujuan membantu menjaga ekosistem fandom JKT48
+    agar tetap aman, sehat, dan bertanggung jawab.</p>
+    <p>Website ini berfungsi sebagai media pencatatan publik terhadap akun media sosial
+    yang dilaporkan atau terindikasi menyebarkan konten tidak pantas,
+    berdasarkan temuan terbuka dan laporan komunitas.</p>
+  </div>
+
+  <!-- Tujuan & Prinsip -->
+  <div class="info-section">
+    <h2>Tujuan & Prinsip</h2>
+    <ul>
+      <li>🛡️ Melindungi member JKT48 dan komunitas dari konten berisiko</li>
+      <li>🔍 Menyajikan dokumentasi berbasis data publik</li>
+      <li>⚖️ Bersikap netral dan tidak menghakimi individu</li>
+      <li>🤝 Mendorong edukasi dan pencegahan di komunitas</li>
+    </ul>
+  </div>
+
+  <!-- Sumber Data -->
+  <div class="info-section">
+    <h2>Sumber Data</h2>
+    <p>Data yang ditampilkan bersumber dari:</p>
+    <ul>
+      <li>Temuan publik di media sosial</li>
+      <li>Laporan komunitas yang dapat diverifikasi</li>
+      <li>Dokumentasi arsip (snapshot) pada waktu tertentu</li>
+    </ul>
+    <p>Status akun dapat berubah sewaktu-waktu dan data mencerminkan kondisi
+    saat pertama kali dicatat.</p>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="info-section disclaimer">
+    <h2>Disclaimer</h2>
+    <p>Seluruh informasi di website ini <strong>bukan merupakan keputusan hukum</strong>
+    dan tidak dimaksudkan sebagai vonis terhadap individu atau pihak mana pun.</p>
+    <p>JKT48 Protection tidak melakukan doxing, perundungan,
+    atau serangan massal, serta tidak berafiliasi dengan manajemen resmi JKT48.</p>
+  </div>
+
+  <!-- Hak Klarifikasi -->
+  <div class="info-section">
+    <h2>Hak Klarifikasi & Koreksi</h2>
+    <p>Kami menghormati hak setiap pihak untuk mengajukan klarifikasi atau permohonan koreksi.</p>
+    <p>Apabila terdapat data yang tidak akurat, tidak relevan,
+    atau akun telah berubah status, silakan menghubungi admin
+    melalui kontak yang tersedia.</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="info-section">
+    <h2>FAQ (Pertanyaan Umum)</h2>
+
+    <div class="faq-item">
+      <div class="faq-question">Apakah website ini resmi milik JKT48? <span>+</span></div>
+      <div class="faq-answer">Tidak. JKT48 Protection merupakan inisiatif independen komunitas dan tidak berafiliasi dengan manajemen resmi JKT48.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Apakah data di website ini permanen? <span>+</span></div>
+      <div class="faq-answer">Tidak. Data dapat diperbarui, dikoreksi, atau dihapus sesuai dengan perkembangan terbaru.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Kenapa sebuah akun bisa tercantum? <span>+</span></div>
+      <div class="faq-answer">Karena adanya laporan publik atau temuan terbuka yang terdokumentasi pada waktu tertentu.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Apakah ini bertujuan menjatuhkan seseorang? <span>+</span></div>
+      <div class="faq-answer">Tidak. Tujuan utama website ini adalah dokumentasi, transparansi, dan edukasi komunitas.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Bagaimana jika akun sudah berubah atau dihapus? <span>+</span></div>
+      <div class="faq-answer">Silakan ajukan klarifikasi atau pembaruan data. Setiap permohonan akan ditinjau secara objektif.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Apakah semua laporan langsung dipublikasikan? <span>+</span></div>
+      <div class="faq-answer">Tidak. Laporan akan melalui proses peninjauan sebelum dicatat sebagai dokumentasi.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Apakah pengunjung boleh menyebarkan ulang data? <span>+</span></div>
+      <div class="faq-answer">Tidak dianjurkan. Data disediakan untuk edukasi dan kewaspadaan, bukan untuk perundungan atau penyebaran kebencian.</div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 JKT48 Protection. All Rights Reserved.
+</footer>
+
+<script>
+const hamburger=document.getElementById("hamburger");
+const menu=document.getElementById("menu");
+
+hamburger.onclick=()=>{
+  hamburger.classList.toggle("active");
+  menu.classList.toggle("open");
+};
+
+document.querySelectorAll(".faq-question").forEach(q=>{
+  q.addEventListener("click",()=>{
+    q.parentElement.classList.toggle("active");
+  });
+});
+</script>
+
+</body>
+</html>

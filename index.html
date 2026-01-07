@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JKT48 Protection</title>
+
+<style>
+:root{
+  --red:#c62828;
+  --dark:#7f0000;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
+}
+
+/* ================= INTRO ================= */
+.splash{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(180deg,#b71c1c,#7f0000);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:9999;
+  overflow:hidden;
+}
+
+.splash.hide{
+  animation:fadeOut .8s ease forwards;
+}
+
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden}
+}
+
+.splash-title{
+  color:#fff;
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:3px;
+  z-index:2;
+}
+
+.shield{
+  position:absolute;
+  opacity:.7;
+  animation:shieldMove linear infinite;
+}
+
+@keyframes shieldMove{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-120vh)}
+}
+
+/* ================= HEADER ================= */
+header{
+  position:sticky;
+  top:0;
+  background:#fff;
+  z-index:1000;
+  border-bottom:1px solid #eee;
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+}
+
+/* BRAND */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+  color:inherit;
+}
+
+.header-logo{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  overflow:hidden;
+}
+
+.header-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.brand-text{
+  line-height:1.2;
+}
+
+.brand-text .title{
+  font-weight:900;
+  font-size:20px;
+}
+
+.brand-text .subtitle{
+  font-size:12px;
+  letter-spacing:1px;
+  color:#777;
+}
+
+/* TITLE MOBILE */
+.header-title{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  font-weight:900;
+  color:var(--red);
+  letter-spacing:2px;
+  display:none;
+}
+
+/* NAV DESKTOP */
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:28px;
+}
+
+nav a{
+  text-decoration:none;
+  color:#333;
+  font-weight:600;
+}
+
+nav a:hover{color:var(--red)}
+
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  width:46px;
+  height:46px;
+  background:var(--red);
+  border-radius:10px;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  cursor:pointer;
+  z-index:2001;
+}
+
+.hamburger span{
+  width:22px;
+  height:3px;
+  background:#fff;
+  border-radius:2px;
+  transition:.3s ease;
+}
+
+.hamburger.active span:nth-child(1){
+  transform:translateY(9px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2){
+  opacity:0;
+}
+.hamburger.active span:nth-child(3){
+  transform:translateY(-9px) rotate(-45deg);
+}
+
+/* ================= HERO ================= */
+.hero{
+  position:relative;
+  height:70vh;
+  overflow:hidden;
+}
+
+.hero-slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity 1s ease;
+}
+
+.hero-slide.active{opacity:1}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:1;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  text-align:center;
+}
+
+/* ===== TEKS SELAMAT DATANG ===== */
+.hero-welcome{
+  font-size:16px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  opacity:.85;
+  margin-bottom:8px;
+}
+
+.hero-content h1{
+  font-size:42px;
+  font-weight:900;
+}
+
+/* ===== SLOGAN ===== */
+.slogan{
+  margin-top:14px;
+  font-size:18px;
+}
+
+.word{
+  position:relative;
+  cursor:pointer;
+  font-weight:700;
+}
+
+/* TOOLTIP DESKTOP */
+.word::after{
+  content:attr(data-desc);
+  position:absolute;
+  bottom:140%;
+  left:50%;
+  transform:translateX(-50%);
+  background:#111;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:13px;
+  width:230px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s ease;
+}
+
+.word::before{
+  content:"";
+  position:absolute;
+  bottom:120%;
+  left:50%;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:#111;
+  opacity:0;
+}
+
+.word:hover::after,
+.word:hover::before{
+  opacity:1;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:var(--dark);
+  color:#fff;
+  text-align:center;
+  padding:24px;
+  font-size:14px;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  .brand{display:none}
+  .header-title{display:block}
+  .hamburger{display:flex}
+
+  nav ul{
+    position:fixed;
+    top:0;
+    right:0;
+    width:260px;
+    height:100vh;
+    background:var(--red);
+    padding:100px 30px;
+    flex-direction:column;
+    gap:24px;
+    transform:translateX(100%);
+    transition:.35s ease;
+    z-index:1500;
+  }
+
+  nav ul.open{transform:translateX(0)}
+
+  nav a{
+    color:#fff;
+    font-size:18px;
+  }
+
+  .word::after,
+  .word::before{
+    display:none;
+  }
+
+  .hero-content h1{font-size:30px}
+
+  .hero-welcome{
+    font-size:14px;
+    letter-spacing:2px;
+  }
+}
+
+/* ===== MOBILE POPUP ===== */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.popup.show{display:flex}
+
+.popup-box{
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  max-width:300px;
+  text-align:center;
+}
+
+.popup-box h3{
+  color:var(--red);
+  margin-bottom:10px;
+}
+
+/* ================= ARSIP INTRO SECTION ================= */
+.arsip-intro{
+  background:linear-gradient(180deg,#b71c1c,#7f0000);
+  color:#fff;
+  padding:70px 20px;
+}
+
+.arsip-inner{
+  max-width:1000px;
+  margin:auto;
+}
+
+.arsip-box{
+  background:rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:36px;
+  box-shadow:0 12px 40px rgba(0,0,0,.25);
+}
+
+/* TITLE */
+.arsip-box h2{
+  font-size:32px;
+  font-weight:900;
+  margin-bottom:12px;
+  letter-spacing:1px;
+}
+
+/* DESC */
+.arsip-desc{
+  font-size:16px;
+  line-height:1.7;
+  opacity:.95;
+  margin-bottom:24px;
+}
+
+/* DISCLAIMER */
+.disclaimer{
+  background:rgba(0,0,0,.25);
+  border-left:4px solid #ffeb3b;
+  padding:18px 20px;
+  border-radius:12px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.disclaimer strong{
+  color:#ffeb3b;
+}
+
+/* LIST TUJUAN */
+.arsip-goal{
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.goal-item{
+  background:rgba(255,255,255,.12);
+  padding:20px;
+  border-radius:14px;
+  text-align:center;
+}
+
+.goal-item h4{
+  font-size:16px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.goal-item p{
+  font-size:14px;
+  opacity:.9;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .arsip-box h2{
+    font-size:26px;
+  }
+
+  .arsip-goal{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ================= ARSIP TABLE + FILTER ================= */
+.arsip-table{
+  background:#fff;
+  padding:60px 20px;
+}
+
+.arsip-table-inner{
+  max-width:1200px;
+  margin:auto;
+}
+
+.arsip-table-title{
+  margin-bottom:20px;
+}
+
+.arsip-table-title h2{
+  font-size:28px;
+  font-weight:900;
+  color:var(--red);
+  margin-bottom:6px;
+}
+
+.arsip-table-title p{
+  font-size:14px;
+  color:#555;
+}
+
+/* FILTER */
+.filter-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+  flex-wrap:wrap;
+}
+
+.filter-bar select{
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* TABLE WRAPPER */
+.table-wrapper{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  border-radius:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+/* TABLE */
+table{
+  width:100%;
+  min-width:900px;
+  border-collapse:collapse;
+  background:#fff;
+}
+
+thead{
+  background:var(--red);
+  color:#fff;
+}
+
+th, td{
+  padding:14px 16px;
+  font-size:14px;
+  text-align:left;
+  border-bottom:1px solid #eee;
+  vertical-align:top;
+}
+
+th{
+  font-weight:800;
+  white-space:nowrap;
+}
+
+tbody tr:hover{
+  background:#fafafa;
+}
+
+/* BADGE */
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.badge-cabul{background:#ffcdd2;color:#b71c1c}
+.badge-salkus{background:#ffe0b2;color:#e65100}
+.badge-lain{background:#e3f2fd;color:#0d47a1}
+
+/* STATUS */
+.status{font-weight:800;white-space:nowrap}
+.status-aktif{color:#2e7d32}
+.status-arsip{color:#f9a825}
+.status-hapus{color:#c62828}
+
+/* LINK */
+.bukti a{
+  color:var(--red);
+  font-weight:800;
+  text-decoration:none;
+}
+.bukti a:hover{text-decoration:underline}
+
+/* MOBILE */
+@media(max-width:768px){
+  th, td{
+    font-size:13px;
+    padding:12px;
+  }
+}
+
+.lapor-section {
+  padding: 80px 20px;
+  background: #0f0f0f;
+}
+
+.lapor-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+/* GAMBAR */
+.lapor-image img {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* KONTEN */
+.lapor-content h2 {
+  color: #fff;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.lapor-content p {
+  color: #bbb;
+  line-height: 1.7;
+  margin-bottom: 25px;
+  max-width: 500px;
+}
+
+.lapor-btn {
+  display: inline-block;
+  background: #c62828;
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.lapor-btn:hover {
+  background: #e53935;
+}
+
+/* RESPONSIF MOBILE */
+@media (max-width: 900px) {
+  .lapor-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .lapor-content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="splash" id="splash">
+  <div class="splash-title">JKT48 PROTECTION</div>
+</div>
+
+<header>
+  <div class="header-inner">
+
+    <a href="index.html" class="brand">
+      <div class="header-logo">
+        <img src="logoindex.jpg">
+      </div>
+      <div class="brand-text">
+        <div class="title">JKT48 Protection</div>
+        <div class="subtitle">OFFICIAL WEBSITE</div>
+      </div>
+    </a>
+
+    <div class="header-title">JKT48 PROTECTION</div>
+
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <ul id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="info.html">Info</a></li>
+        <li><a href="#">Laporan</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-slide active" style="background-image:url('hero1.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('hero2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('hero3.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('hero4.jpg')"></div>
+
+  <div class="hero-content">
+    <div class="hero-welcome">Selamat Datang di</div>
+    <h1>JKT48 PROTECTION</h1>
+
+    <div class="slogan">
+      <span class="word" data-title="Protect" data-desc="Melindungi member JKT48 dan fandom dari hoaks, fitnah, dan ujaran kebencian.">Protect</span>
+      •
+      <span class="word" data-title="Support" data-desc="Mendukung JKT48 dan komunitas dengan cara yang positif dan bertanggung jawab.">Support</span>
+      •
+      <span class="word" data-title="Unite" data-desc="Menyatukan fandom lintas oshi, generasi, dan komunitas.">Unite</span>
+    </div>
+  </div>
+</section>
+
+<section class="lapor-section">
+  <div class="lapor-inner">
+
+    <!-- KIRI: GAMBAR -->
+    <div class="lapor-image">
+      <img src="lapor.png" alt="Lapor Akun Bermasalah">
+    </div>
+
+    <!-- KANAN: TEKS -->
+    <div class="lapor-content">
+      <h2>Menemukan Akun Bermasalah Lain?</h2>
+      <p>
+        Bantu kami mendokumentasikan akun yang terindikasi bermasalah
+        agar arsip ini tetap lengkap dan transparan untuk publik.
+      </p>
+      <a href="#lapor" class="lapor-btn">Laporkan Akun</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="arsip-intro">
+  <div class="arsip-inner">
+
+    <div class="arsip-box">
+      <h2>Arsip Dokumentasi Akun Bermasalah</h2>
+
+      <p class="arsip-desc">
+        Website ini berfungsi sebagai media <strong>arsip dan pencatatan laporan publik</strong>
+        terhadap akun media sosial yang <em>dilaporkan atau terindikasi</em>
+        menyebarkan konten cabul, seksual, atau tidak pantas.
+        Data dikumpulkan sebagai bentuk dokumentasi agar tidak hilang
+        meskipun akun telah dihapus atau disembunyikan.
+      </p>
+
+      <div class="disclaimer">
+        <strong>Disclaimer:</strong><br>
+        Seluruh data yang ditampilkan bersumber dari temuan publik dan laporan masyarakat.
+        Informasi di dalam website ini <strong>bukan merupakan keputusan hukum</strong>
+        dan status akun dapat berubah sewaktu-waktu.
+        Website ini tidak bermaksud untuk melakukan perundungan, doxing,
+        atau penghakiman terhadap individu mana pun.
+      </div>
+
+      <div class="arsip-goal">
+        <div class="goal-item">
+          <h4>📁 Arsip Data</h4>
+          <p>Menyimpan dokumentasi akun bermasalah sebagai backup publik.</p>
+        </div>
+        <div class="goal-item">
+          <h4>🔍 Transparansi</h4>
+          <p>Memberikan catatan terbuka berbasis bukti dan tanggal.</p>
+        </div>
+        <div class="goal-item">
+          <h4>🛡️ Pencegahan</h4>
+          <p>Membantu komunitas lebih waspada terhadap akun berisiko.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="arsip-table">
+  <div class="arsip-table-inner">
+
+    <div class="arsip-table-title">
+      <h2>Daftar Akun Terdokumentasi</h2>
+      <p>
+        Arsip akun media sosial yang dilaporkan atau terindikasi bermasalah.
+        Data dicatat berdasarkan temuan publik dan dapat berubah sewaktu-waktu.
+      </p>
+    </div>
+
+    <!-- FILTER -->
+    <div class="filter-bar">
+      <select id="platformFilter">
+        <option value="all">Semua Platform</option>
+        <option value="x">X (Twitter)</option>
+        <option value="threads">Threads</option>
+        <option value="tiktok">TikTok</option>
+      </select>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Akun</th>
+            <th>Platform</th>
+            <th>Kategori</th>
+            <th>Status Saat Dicatat</th>
+            <th>Tanggal</th>
+            <th>Bukti</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- X / Twitter -->
+          <tr data-platform="x">
+            <td>@Pitshot_JKT48</td>
+            <td>X (Twitter)</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://x.com/Pitshot_JKT48" target="_blank">Lihat</a></td>
+          </tr>
+
+          <tr data-platform="x">
+            <td>@Casanova_Muire</td>
+            <td>X (Twitter)</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://x.com/Casanova_Muire" target="_blank">Lihat</a></td>
+          </tr>
+
+          <tr data-platform="x">
+            <td>@nxgiichi</td>
+            <td>X (Twitter)</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://x.com/nxgiichi" target="_blank">Lihat</a></td>
+          </tr>
+
+          <tr data-platform="x">
+            <td>@thesecretjoys</td>
+            <td>X (Twitter)</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://x.com/thesecretjoys" target="_blank">Lihat</a></td>
+          </tr>
+
+          <tr data-platform="x">
+            <td>@shrimphhh</td>
+            <td>X (Twitter)</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://x.com/shrimphhh" target="_blank">Lihat</a></td>
+          </tr>
+
+          <tr data-platform="x">
+            <td>@ivekiiillit2h</td>
+            <td>X (Twitter)</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://x.com/ivekiiillit2h" target="_blank">Lihat</a></td>
+          </tr>
+
+          <tr data-platform="x">
+            <td>@AzizSholehudin</td>
+            <td>X (Twitter)</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://x.com/AzizSholehudin" target="_blank">Lihat</a></td>
+          </tr>
+
+          <!-- Threads -->
+          <tr data-platform="threads">
+            <td>@canc3r_18</td>
+            <td>Threads</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://threads.com/canc3r_18" target="_blank">Lihat</a></td>
+          </tr>
+
+          <!-- TikTok -->
+          <tr data-platform="tiktok">
+            <td>@ranyo_company</td>
+            <td>TikTok</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://tiktok.com/@ranyo_company" target="_blank">Lihat</a></td>
+          </tr>
+
+          <tr data-platform="tiktok">
+            <td>@abasabis3126</td>
+            <td>TikTok</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://tiktok.com/@abasabis3126" target="_blank">Lihat</a></td>
+          </tr>
+
+          <tr data-platform="tiktok">
+            <td>@devaa274</td>
+            <td>TikTok</td>
+            <td><span class="badge badge-lain">Konten Tidak Pantas</span></td>
+            <td class="status status-aktif">Aktif</td>
+            <td>Jan 2026</td>
+            <td class="bukti"><a href="https://tiktok.com/@devaa274" target="_blank">Lihat</a></td>
+          </tr>
+
+<!-- TikTok – tambahan dari daftar -->
+<tr data-platform="tiktok"><td>@angella.x.alex</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@angella.x.alex" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wot48ul_</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wot48ul_" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@ranyocompany.5</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@ranyocompany.5" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@v2l3ncia</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@v2l3ncia" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@admin.ai3</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@admin.ai3" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@jkt48_hebat</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@jkt48_hebat" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@jktawaw2</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@jktawaw2" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wong.gendeng278</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wong.gendeng278" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@b4co__</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@b4co__" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@begbeng.45</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@begbeng.45" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@oranggbt70</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@oranggbt70" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@zeveruzt</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@zeveruzt" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@bahancrtjkt48</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@bahancrtjkt48" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@reyzzxtoya</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@reyzzxtoya" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@rhmddadrn_</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@rhmddadrn_" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@bahan.crtt69</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@bahan.crtt69" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@jenna_ahh3</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@jenna_ahh3" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul.an</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul.an" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@c.cathyyy_</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@c.cathyyy_" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@crotttttt4</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@crotttttt4" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@crt.jekate48</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@crt.jekate48" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@admin.ai2</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@admin.ai2" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@ai.indo</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@ai.indo" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@dinda.putt</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@dinda.putt" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@belut_lendir</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@belut_lendir" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@ai_prim1</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@ai_prim1" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@nol.satu43</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@nol.satu43" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@dragon.jf88</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@dragon.jf88" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul.tele</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul.tele" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@ai_jkt48crt</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@ai_jkt48crt" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul480</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul480" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@jkt.48.ai6</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@jkt.48.ai6" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul684</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul684" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul7777</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul7777" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@rizz_turu</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@rizz_turu" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@bahankeluarmu</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@bahankeluarmu" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul_bkp</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul_bkp" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@lenathea.lapian41</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@lenathea.lapian41" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@allselebgramsosmed</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@allselebgramsosmed" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul853</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul853" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@ai_jkt4809</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@ai_jkt4809" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul088</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul088" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul_ai</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul_ai" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul_76</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul_76" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@wotabul441</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@wotabul441" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@freyajkt595</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@freyajkt595" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@j.levy86</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@j.levy86" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@prometheus7047</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@prometheus7047" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@ikan.hiuuuuuuuuuuuuuuuuu</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@ikan.hiuuuuuuuuuuuuuuuuu" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@user37476439_</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@user37476439_" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@_yummxz48</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@_yummxz48" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@fullcristycekdibio</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@fullcristycekdibio" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@jkt481595</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@jkt481595" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@anonymoususer041606</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@anonymoususer041606" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@raa_christy22</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@raa_christy22" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@jktcrt</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@jktcrt" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@jktgg00</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@jktgg00" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@bearr.il</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@bearr.il" target="_blank">Lihat</a></td></tr>
+<tr data-platform="tiktok"><td>@exymyli</td><td>TikTok</td><td><span class="badge badge-lain">Konten Tidak Pantas</span></td><td class="status status-aktif">Aktif</td><td>Jan 2026</td><td class="bukti"><a href="https://tiktok.com/@exymyli" target="_blank">Lihat</a></td></tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © 2026 JKT48 Protection. All Rights Reserved.
+</footer>
+
+<!-- POPUP MOBILE -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <h3 id="popupTitle"></h3>
+    <p id="popupDesc"></p>
+  </div>
+</div>
+
+<script>
+// INTRO SHIELD
+const splash=document.getElementById("splash");
+for(let i=0;i<22;i++){
+  const s=document.createElement("div");
+  s.className="shield";
+  s.textContent="🛡️";
+  s.style.left=Math.random()*100+"%";
+  s.style.fontSize=16+Math.random()*22+"px";
+  s.style.animationDuration=5+Math.random()*6+"s";
+  splash.appendChild(s);
+}
+setTimeout(()=>splash.classList.add("hide"),3000);
+
+// HAMBURGER
+const hamburger=document.getElementById("hamburger");
+const menu=document.getElementById("menu");
+hamburger.onclick=()=>{
+  hamburger.classList.toggle("active");
+  menu.classList.toggle("open");
+};
+
+// HERO SLIDER
+const slides=document.querySelectorAll(".hero-slide");
+let index=0;
+setInterval(()=>{
+  slides[index].classList.remove("active");
+  index=(index+1)%slides.length;
+  slides[index].classList.add("active");
+},5000);
+
+// MOBILE POPUP
+const popup=document.getElementById("popup");
+const popupTitle=document.getElementById("popupTitle");
+const popupDesc=document.getElementById("popupDesc");
+
+document.querySelectorAll(".word").forEach(word=>{
+  word.addEventListener("click",()=>{
+    if(window.innerWidth<=768){
+      popupTitle.textContent=word.dataset.title;
+      popupDesc.textContent=word.dataset.desc;
+      popup.classList.add("show");
+    }
+  });
+});
+
+popup.addEventListener("click",()=>{
+  popup.classList.remove("show");
+});
+</script>
+
+<script>
+const platformFilter = document.getElementById("platformFilter");
+const rows = document.querySelectorAll("tbody tr");
+
+platformFilter.addEventListener("change", () => {
+  const value = platformFilter.value;
+
+  rows.forEach(row => {
+    if (value === "all" || row.dataset.platform === value) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+});
+</script>
+</body>
+</html>
