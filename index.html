@@ -707,6 +707,33 @@ tbody tr:hover{
   text-align: right;
   font-style: italic;
 }
+
+.pagination{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.pagination button{
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  background:#eee;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.pagination button.active{
+  background:#333;
+  color:#fff;
+}
+
+.pagination button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
 </style>
 </head>
 
@@ -2184,6 +2211,9 @@ tbody tr:hover{
       </table>
     </div>
 
+    <!-- 🔥 PAGINATION TARUH DI SINI -->
+    <div class="pagination" id="pagination"></div>
+
   </div>
 </section>
 
@@ -2327,6 +2357,121 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // HITUNG SAAT LOAD PERTAMA
+  updateSummary();
+
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const rows = Array.from(document.querySelectorAll("tbody tr"));
+  const platformFilter = document.getElementById("platformFilter");
+  const pagination = document.getElementById("pagination");
+
+  const ITEMS_PER_PAGE = 50;
+  let currentPage = 1;
+  let filteredRows = [];
+
+  function applyFilter() {
+    const value = platformFilter.value;
+    currentPage = 1;
+
+    filteredRows = rows.filter(row => {
+      return value === "all" || row.dataset.platform === value;
+    });
+
+    renderPage();
+    renderPagination();
+    updateSummary();
+  }
+
+  function renderPage() {
+    rows.forEach(row => row.style.display = "none");
+
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+
+    filteredRows.slice(start, end).forEach(row => {
+      row.style.display = "";
+    });
+  }
+
+  function renderPagination() {
+    pagination.innerHTML = "";
+    const totalPages = Math.ceil(filteredRows.length / ITEMS_PER_PAGE);
+
+    if (totalPages <= 1) return;
+
+    // Prev
+    const prev = document.createElement("button");
+    prev.textContent = "‹";
+    prev.disabled = currentPage === 1;
+    prev.onclick = () => {
+      currentPage--;
+      renderPage();
+      renderPagination();
+      updateSummary();
+    };
+    pagination.appendChild(prev);
+
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add("active");
+
+      btn.onclick = () => {
+        currentPage = i;
+        renderPage();
+        renderPagination();
+        updateSummary();
+      };
+      pagination.appendChild(btn);
+    }
+
+    // Next
+    const next = document.createElement("button");
+    next.textContent = "›";
+    next.disabled = currentPage === totalPages;
+    next.onclick = () => {
+      currentPage++;
+      renderPage();
+      renderPagination();
+      updateSummary();
+    };
+    pagination.appendChild(next);
+  }
+
+  function updateSummary() {
+    let total = 0;
+    let aktif = 0, nonaktif = 0, suspended = 0;
+
+    filteredRows.forEach(row => {
+      total++;
+      const status = row.cells[3].innerText.toLowerCase();
+
+      if (status.includes("aktif") && !status.includes("non")) aktif++;
+      else if (status.includes("nonaktif")) nonaktif++;
+      else if (status.includes("suspended")) suspended++;
+    });
+
+    sumTotal.innerText = total;
+    sumAktif.innerText = aktif;
+    sumNonaktif.innerText = nonaktif;
+    sumSuspended.innerText = suspended;
+
+    perAktif.innerText = total ? ((aktif/total)*100).toFixed(1)+"%" : "0%";
+    perNonaktif.innerText = total ? ((nonaktif/total)*100).toFixed(1)+"%" : "0%";
+    perSuspended.innerText = total ? ((suspended/total)*100).toFixed(1)+"%" : "0%";
+  }
+
+  platformFilter.addEventListener("change", applyFilter);
+
+  // INIT
+  filteredRows = rows;
+  renderPage();
+  renderPagination();
   updateSummary();
 
 });
