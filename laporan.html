@@ -102,6 +102,25 @@ nav a{
   border-radius:2px;
 }
 
+.hamburger span{
+  width:22px;
+  height:3px;
+  background:#fff;
+  border-radius:2px;
+  transition:.3s ease;
+}
+
+/* ===== HAMBURGER → X ===== */
+.hamburger.active span:nth-child(1){
+  transform:translateY(9px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2){
+  opacity:0;
+}
+.hamburger.active span:nth-child(3){
+  transform:translateY(-9px) rotate(-45deg);
+}
+
 /* ================= CONTENT ================= */
 .report-wrapper{
   max-width:900px;
@@ -371,7 +390,10 @@ footer{
 /* ================== MENU ================== */
 const hamburger = document.getElementById("hamburger");
 const menu = document.getElementById("menu");
-hamburger.onclick = () => menu.classList.toggle("open");
+hamburger.onclick = () => {
+  hamburger.classList.toggle("active");
+  menu.classList.toggle("open");
+};
 
 /* ================== NORMALISASI + FUZZY ================== */
 function normalizeText(text) {
