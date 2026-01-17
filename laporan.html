@@ -169,6 +169,27 @@ form button{
 
 form button:hover{background:#e53935}
 
+.success-msg{
+  display:none;
+  margin-top:20px;
+  padding:14px;
+  background:#e8f5e9;
+  border-left:6px solid #2e7d32;
+  color:#2e7d32;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.error-msg{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  background:#fdecea;
+  border-left:6px solid #c62828;
+  color:#c62828;
+  border-radius:10px;
+}
+
 /* FOOTER */
 footer{
   background:var(--dark);
@@ -200,6 +221,16 @@ footer{
 
   nav ul.open{transform:translateX(0)}
   nav a{color:#fff;font-size:18px}
+}
+
+.form-warning {
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
 }
 </style>
 </head>
@@ -251,21 +282,27 @@ footer{
     </div>
   </div>
 
-  <!-- FORM -->
-  <div class="report-box">
-    <h2>Form Laporan Anonim</h2>
-    <p>
-      Form ini bersifat <strong>anonim</strong>. Data akan langsung masuk ke sistem arsip kami.
-    </p>
+<!-- FORM -->
+<div class="report-box">
+  <h2>Form Laporan Anonim</h2>
+  <p>
+    Form ini bersifat <strong>anonim</strong>. Data akan langsung masuk ke sistem arsip kami.
+  </p>
 
-    <form id="reportForm">
+<div class="form-warning">
+  ⚠️ Form ini hanya dapat diisi <b>maksimal 2 kali dalam 15 menit</b>.
+  <br>
+  Harap masukkan data dengan <b>benar, sopan, dan sesuai fakta</b>.
+</div>
+
+  <form id="reportForm">
+
       <label>Nama Akun Bermasalah</label>
       <input type="text" name="akun" required>
 
       <label>Platform Sosial Media</label>
-<select name="platform" required>
+     <select name="platform" required>
   <option value="">Pilih Platform</option>
-
   <option value="X / Twitter">X (Twitter)</option>
   <option value="Instagram">Instagram</option>
   <option value="Telegram">Telegram</option>
@@ -274,19 +311,54 @@ footer{
   <option value="Threads">Threads</option>
   <option value="YouTube">YouTube</option>
   <option value="TikTok">TikTok</option>
-  <option value="Pinterest">Pinterest</option>
-
-  <!-- Tambahan 3 platform lain -->
   <option value="Discord">Discord</option>
-  <option value="WhatsApp Channel">WhatsApp Channel</option>
+  <option value="Pinterest">Pinterest</option>
+  <option value="Wattpad">Wattpad</option>
   <option value="Website / Blog">Website / Blog</option>
 </select>
 
-      <label>Bukti (link / URL screenshot)</label>
-      <textarea name="bukti" rows="4" required></textarea>
+      <label>Kategori Laporan</label>
+<select name="kategori" required>
+  <option value="">Pilih Kategori</option>
+
+  <option value="Pelecehan">Pelecehan</option>
+  <option value="Penipuan">Penipuan</option>
+  <option value="Pencemaran Nama Baik">Pencemaran Nama Baik</option>
+  <option value="Ancaman">Ancaman</option>
+
+  <option value="AU / Alternate Universe">AU / Alternate Universe</option>
+  <option value="Konten Tidak Pantas">Konten Tidak Pantas</option>
+  <option value="Penyebaran Hoaks">Penyebaran Hoaks</option>
+  <option value="Provokasi / Ujaran Kebencian">Provokasi / Ujaran Kebencian</option>
+  <option value="Impersonasi">Impersonasi (Akun Palsu)</option>
+
+  <option value="Lainnya">Lainnya</option>
+</select>
+
+<label>Alasan / Kronologi</label>
+<textarea
+  name="alasan"
+  rows="5"
+  placeholder="Jelaskan kronologi kejadian secara singkat, jelas, dan sesuai fakta. Sertakan waktu, konteks, dan dampak jika ada."
+  required
+></textarea>
+
+      <label>
+        Bukti  
+        <small>(link Google Drive, link sosial media, atau link doksli)</small>
+      </label>
+      <input type="url" name="bukti" placeholder="https://" required>
 
       <button type="submit">Kirim Laporan</button>
     </form>
+
+    <div class="error-msg" id="errorMsg">
+      ❌ Bukti wajib berupa link (URL), bukan kalimat.
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      ✔ Pesan telah diterima. Terima kasih atas laporan Anda.
+    </div>
   </div>
 
 </main>
@@ -296,30 +368,157 @@ footer{
 </footer>
 
 <script>
+/* ================== MENU ================== */
 const hamburger = document.getElementById("hamburger");
 const menu = document.getElementById("menu");
+hamburger.onclick = () => menu.classList.toggle("open");
 
-hamburger.onclick = () => {
-  hamburger.classList.toggle("active");
-  menu.classList.toggle("open");
-};
+/* ================== NORMALISASI + FUZZY ================== */
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .replace(/[4@]/g, "a")
+    .replace(/[1!]/g, "i")
+    .replace(/[0]/g, "o")
+    .replace(/[3]/g, "e")
+    .replace(/[$5]/g, "s")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
-document.getElementById("reportForm").addEventListener("submit", function(e){
+/* ================== KATA TERLARANG (1 KATA = GAGAL) ================== */
+const forbiddenWords = [
+  // kasar & makian
+  "goblok","tolol","bodoh","jot","bacot",
+  "anjing","babi","bangsat","bajingan","kampret",
+
+  // seksual
+  "kontol","memek","ngentot","perek","sange",
+
+  // kata kasar ringan / provokatif
+  "bawel","rewel","cerewet","nyinyir","rese","berisik",
+  "lebay","ribet","drama","pansos","caper",
+
+  // sapaan kasar
+  "lu","lo","gw","gua",
+
+  // lainnya
+  "gabut"
+];
+
+/* ================== POLA KALIMAT ================== */
+const forbiddenPatterns = [
+  /sok\s*peduli/,
+  /peduli\s*amat/,
+  /sok\s*pahlawan/,
+  /pahlawan\s*kesiangan/,
+  /cari\s*perhatian/,
+  /kurang\s*kerjaan/,
+  /ngapain(\s*aja|\s*sih)?/,
+  /ga(k)?\s*penting/,
+  /urus\s*hidup\s*lu/,
+  /siapa\s*(lu|elu)/,
+  /ngapain\s*dilaporin/,
+  /ga\s*usah\s*dilaporin/
+];
+
+/* ================== RATE LIMIT (2 LAPORAN / 15 MENIT) ================== */
+function isRateLimited() {
+  const now = Date.now();
+  const limitWindow = 15 * 60 * 1000; // 15 menit
+
+  let data = JSON.parse(localStorage.getItem("report_limit")) || {
+    count: 0,
+    startTime: now
+  };
+
+  // reset jika lewat 15 menit
+  if (now - data.startTime > limitWindow) {
+    data = {
+      count: 0,
+      startTime: now
+    };
+  }
+
+  if (data.count >= 2) {
+    return true;
+  }
+
+  data.count += 1;
+  localStorage.setItem("report_limit", JSON.stringify(data));
+  return false;
+}
+
+/* ================== FORM ================== */
+const form = document.getElementById("reportForm");
+const successMsg = document.getElementById("successMsg");
+const errorMsg = document.getElementById("errorMsg");
+
+form.addEventListener("submit", function(e){
   e.preventDefault();
 
-  fetch("https://script.google.com/macros/s/AKfycbxOycdbIFrzbNIZMvC5ApWYVxmvJQTmfXhZzVX2ypLIEm_PODGwM9Zbxe4jF82v_2FE/exec", {
-    method: "POST",
-    body: new FormData(this)
-  })
-  .then(res => res.text())
-  .then(txt => {
-    alert("Server: " + txt);
-    this.reset();
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Gagal mengirim laporan");
+  /* 🚫 RATE LIMIT */
+  if (isRateLimited()) {
+    errorMsg.innerText =
+      "Kamu hanya bisa mengirim 2 laporan setiap 15 menit.";
+    errorMsg.style.display = "block";
+    successMsg.style.display = "none";
+    return;
+  }
+
+  /* 🔥 GABUNG SEMUA INPUT */
+  let combinedText = "";
+  form.querySelectorAll("input, textarea, select").forEach(el => {
+    if (el.value) combinedText += " " + el.value;
   });
+
+  const text = normalizeText(combinedText);
+
+  /* 🚫 CEK KATA TERLARANG */
+  for (const word of forbiddenWords) {
+    const regex = new RegExp(`\\b${word}\\b`, "i");
+    if (regex.test(text)) {
+      errorMsg.innerText =
+        "Laporan ditolak karena mengandung kata kasar atau ujaran kebencian.";
+      errorMsg.style.display = "block";
+      successMsg.style.display = "none";
+      return;
+    }
+  }
+
+  /* 🚫 CEK POLA KALIMAT */
+  for (const pattern of forbiddenPatterns) {
+    if (pattern.test(text)) {
+      errorMsg.innerText =
+        "Laporan ditolak karena mengandung kalimat merendahkan atau provokatif.";
+      errorMsg.style.display = "block";
+      successMsg.style.display = "none";
+      return;
+    }
+  }
+
+  /* 🔗 VALIDASI LINK */
+  const bukti = form.bukti.value.trim();
+  if (!/^https?:\/\/\S+$/i.test(bukti)) {
+    errorMsg.innerText =
+      "Kolom bukti WAJIB berupa link (Google Drive / Sosial Media).";
+    errorMsg.style.display = "block";
+    successMsg.style.display = "none";
+    return;
+  }
+
+  errorMsg.style.display = "none";
+
+  fetch("https://script.google.com/macros/s/AKfycbzrppswpw0IkqTHYRaRgQRwXmoYU8emCL6U7GBGplH8Tto6yHnRVO8wgbUqcrjup1Eo/exec", {
+    method: "POST",
+    body: new FormData(form)
+  })
+  .then(() => {
+    form.reset();
+    successMsg.style.display = "block";
+  })
+  .catch(() => alert("Gagal mengirim laporan"));
 });
 </script>
 
