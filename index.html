@@ -775,6 +775,34 @@ tbody tr:hover{
   background: rgba(59, 130, 246, 0.15); /* biru */
   color: #3b82f6;
 }
+
+/* Kolom Total Laporan */
+td:last-child,
+th:last-child {
+  text-align: center;
+  font-weight: 800;
+}
+
+/* Angka laporan lebih kelihatan */
+td:last-child strong {
+  color: #b91c1c;
+}
+
+.filter-bar input{
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-weight:600;
+  min-width:220px;
+}
+
+.no-data{
+  text-align:center;
+  padding:40px 20px;
+  font-size:16px;
+  font-weight:700;
+  color:#777;
+}
 </style>
 </head>
 
@@ -929,14 +957,14 @@ tbody tr:hover{
     <span>Suspended: <b id="sumSuspended">0</b></span>
   </div>
 
-  <!-- PLATFORM -->
-  <div class="summary-row summary-platform">
-    <span>X: <b id="sumX">0</b></span>
-    <span>TikTok: <b id="sumTikTok">0</b></span>
-    <span>Instagram: <b id="sumIG">0</b></span>
-    <span>Telegram: <b id="sumTG">0</b></span>
-    <span>Facebook: <b id="sumFB">0</b></span>
-  </div>
+<div class="summary-row summary-platform">
+  <span>X: <b id="sumX">0</b></span>
+  <span>TikTok: <b id="sumTikTok">0</b></span>
+  <span>Instagram: <b id="sumIG">0</b></span>
+  <span>Telegram: <b id="sumTG">0</b></span>
+  <span>Facebook: <b id="sumFB">0</b></span>
+  <span>Discord: <b id="sumDiscord">0</b></span>
+</div>
 
   <!-- PERSENTASE -->
   <div class="summary-row summary-percent">
@@ -948,16 +976,23 @@ tbody tr:hover{
 </div>
 
     <!-- FILTER -->
-    <div class="filter-bar">
-      <select id="platformFilter">
-        <option value="all">Semua Platform</option>
-        <option value="x">X (Twitter)</option>
-        <option value="threads">Threads</option>
-        <option value="tiktok">TikTok</option>
-        <option value="telegram">Telegram</option>
-        <option value="facebook">Facebook</option>
-      </select>
-    </div>
+<div class="filter-bar">
+  <select id="platformFilter">
+    <option value="all">Semua Platform</option>
+    <option value="x">X (Twitter)</option>
+    <option value="threads">Threads</option>
+    <option value="tiktok">TikTok</option>
+    <option value="telegram">Telegram</option>
+    <option value="facebook">Facebook</option>
+    <option value="discord">Discord</option>
+  </select>
+
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Cari nama akun..."
+  >
+</div>
 
     <!-- TABLE -->
     <div class="table-wrapper">
@@ -969,236 +1004,157 @@ tbody tr:hover{
             <th>Kategori</th>
             <th>Status Saat Ini</th>
             <th>Tanggal</th>
+            <th>Total Laporan</th>
           </tr>
         </thead>
         <tbody>
 
-          <!-- X / Twitter -->
-          <tr data-platform="x">
-            <td>@Pitshot_JKT48</td>
-            <td>X (Twitter)</td>
-            <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-            <td class="status status-aktif">Aktif</td>
-            <td>Jan 2026</td>
-          </tr>
+<tbody>
+  <tr data-platform="x">
+    <td>@Pitshot_JKT48</td>
+    <td>X (Twitter)</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-          <tr data-platform="x">
-            <td>@Casanova_Muire</td>
-            <td>X (Twitter)</td>
-            <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-            <td class="status status-nonaktif">Nonaktif</td>
-            <td>Jan 2026</td>
-          </tr>
+  <tr data-platform="x">
+    <td>@Casanova_Muire</td>
+    <td>X (Twitter)</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-nonaktif">Nonaktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-          <tr data-platform="x">
-            <td>@nxgiichi</td>
-            <td>X (Twitter)</td>
-            <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-            <td class="status status-aktif">Aktif</td>
-            <td>Jan 2026</td>
-          </tr>
+  <tr data-platform="x">
+    <td>@nxgiichi</td>
+    <td>X (Twitter)</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-          <tr data-platform="x">
-            <td>@thesecretjoys</td>
-            <td>X (Twitter)</td>
-            <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-            <td class="status status-aktif">Aktif</td>
-            <td>Jan 2026</td>
-          </tr>
+  <tr data-platform="x">
+    <td>@thesecretjoys</td>
+    <td>X (Twitter)</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-          <tr data-platform="x">
-            <td>@shrimphhh</td>
-            <td>X (Twitter)</td>
-            <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-            <td class="status status-aktif">Aktif</td>
-            <td>Jan 2026</td>
-          </tr>
+  <tr data-platform="x">
+    <td>@shrimphhh</td>
+    <td>X (Twitter)</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-          <tr data-platform="x">
-            <td>@ivekiiillit2h</td>
-            <td>X (Twitter)</td>
-            <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-            <td class="status status-nonaktif">Nonaktif</td>
-            <td>Jan 2026</td>
-          </tr>
+  <tr data-platform="x">
+    <td>@ivekiiillit2h</td>
+    <td>X (Twitter)</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-nonaktif">Nonaktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-          <tr data-platform="x">
-            <td>@AzizSholehudin</td>
-            <td>X (Twitter)</td>
-            <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-            <td class="status status-nonaktif">Nonaktif</td>
-            <td>Jan 2026</td>
-          </tr>
+  <tr data-platform="x">
+    <td>@AzizSholehudin</td>
+    <td>X (Twitter)</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-nonaktif">Nonaktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-          <!-- Threads -->
-          <tr data-platform="threads">
-            <td>@canc3r_18</td>
-            <td>Threads</td>
-            <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-            <td class="status status-aktif">Aktif</td>
-            <td>Jan 2026</td>
-          </tr>
+  <tr data-platform="threads">
+    <td>@canc3r_18</td>
+    <td>Threads</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
- <!-- ================= TIKTOK ================= -->
-<tr data-platform="tiktok">
-  <td>@ranyo_company</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
+  <!-- ===== TikTok ===== -->
 
-<tr data-platform="tiktok">
-  <td>@abasabis3126</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
+  <tr data-platform="tiktok">
+    <td>@ranyo_company</td>
+    <td>TikTok</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-<tr data-platform="tiktok">
-  <td>@devaa274</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
+  <tr data-platform="tiktok">
+    <td>@abasabis3126</td>
+    <td>TikTok</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-<tr data-platform="tiktok">
-  <td>@angella.x.alex</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
+  <tr data-platform="tiktok">
+    <td>@devaa274</td>
+    <td>TikTok</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-<tr data-platform="tiktok">
-  <td>@wot48ul_</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
+  <tr data-platform="tiktok">
+    <td>@angella.x.alex</td>
+    <td>TikTok</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-<tr data-platform="tiktok">
-  <td>@ranyocompany.5</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
+  <tr data-platform="tiktok">
+    <td>@wot48ul_</td>
+    <td>TikTok</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-<tr data-platform="tiktok">
-  <td>@v2l3ncia</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
+  <tr data-platform="tiktok">
+    <td>@zeveruzt</td>
+    <td>TikTok</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>4</strong></td>
+  </tr>
 
-<tr data-platform="tiktok">
-  <td>@admin.ai3</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
+  <tr data-platform="tiktok">
+    <td>@rhmddadrn_</td>
+    <td>TikTok</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-nonaktif">Nonaktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
-<tr data-platform="tiktok">
-  <td>@jkt48_hebat</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@jktawaw2</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@wong.gendeng278</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@b4co__</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-nonaktif">Nonaktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@begbeng.45</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@oranggbt70</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@zeveruzt</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@bahancrtjkt48</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@reyzzxtoya</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@rhmddadrn_</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-nonaktif">Nonaktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@bahan.crtt69</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-nonaktif">Nonaktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@jenna_ahh3</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
+  <tr data-platform="tiktok">
+    <td>@jenna_ahh3</td>
+    <td>TikTok</td>
+    <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+    <td class="status status-aktif">Aktif</td>
+    <td>Jan 2026</td>
+    <td><strong>1</strong></td>
+  </tr>
 
 <tr data-platform="tiktok">
   <td>@wotabul.an</td>
@@ -1206,6 +1162,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1214,6 +1171,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1222,6 +1180,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1230,6 +1189,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1238,6 +1198,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1246,6 +1207,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1254,6 +1216,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1262,6 +1225,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1270,6 +1234,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1278,6 +1243,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1286,6 +1252,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1294,6 +1261,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1302,6 +1270,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1310,6 +1279,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1318,6 +1288,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1326,6 +1297,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1334,6 +1306,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1342,6 +1315,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1350,6 +1324,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1358,6 +1333,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1366,6 +1342,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1374,6 +1351,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1382,6 +1360,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1390,6 +1369,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1398,6 +1378,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1406,6 +1387,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1414,6 +1396,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1422,6 +1405,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1430,6 +1414,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1438,6 +1423,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1446,6 +1432,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1454,6 +1441,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1462,6 +1450,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1470,14 +1459,16 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
   <td>@fullcristycekdibio</td>
   <td>TikTok</td>
-  <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
+  <td><span class="badge badge-tidakpantas">Konten Tidak Pantas</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1486,6 +1477,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1494,6 +1486,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1502,6 +1495,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1510,6 +1504,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1518,6 +1513,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1526,6 +1522,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -1534,6 +1531,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="telegram">
@@ -1542,6 +1540,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="telegram">
@@ -1550,6 +1549,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-suspended">Suspended</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="telegram">
@@ -1558,6 +1558,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="telegram">
@@ -1566,6 +1567,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="telegram">
@@ -1574,62 +1576,61 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="tiktok">
+<tr data-platform="tiktok" class="highlight">
   <td>@hanyacigre</td>
   <td>TikTok</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>4</strong></td>
 </tr>
 
-<tr data-platform="tiktok">
+<tr data-platform="tiktok" class="highlight">
   <td>@wotabullxyz</td>
   <td>TikTok</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>3</strong></td>
 </tr>
 
-<tr data-platform="instagram">
+<tr data-platform="instagram" class="highlight">
   <td>@alexis_ness10</td>
   <td>Instagram</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>3</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@CarlosMPZX</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-suspended">Suspended</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@ekopujianto1503</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-ancaman">Ancaman</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="telegram">
+<tr data-platform="telegram" class="highlight">
   <td>@OceanDepth</td>
   <td>Telegram</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@zeveruzt</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
+  <td><strong>3</strong></td>
 </tr>
 
 <tr data-platform="telegram">
@@ -1638,94 +1639,106 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@TakoSenpai62</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@FantasyActr_s</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="instagram">
+<tr data-platform="instagram" class="highlight">
   <td>@Akunketek48</td>
   <td>Instagram</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>3</strong></td>
 </tr>
 
 <tr data-platform="facebook">
-  <td>@Jkt48 Universe</td>
+  <td>Jkt48 Universe</td>
   <td>Facebook</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
 <tr data-platform="facebook">
-  <td>@Delynessence Shanghai</td>
+  <td>Delynessence Shanghai</td>
   <td>Facebook</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="facebook">
-  <td>@Veranda JKT48</td>
+<tr data-platform="facebook" class="highlight">
+  <td>Veranda JKT48</td>
   <td>Facebook</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>4</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Arusmanda</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@jkt48v_tdaily</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@AkunSosis2</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter" class="highlight">
   <td>@eienpressxre</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>7</strong></td>
 </tr>
 
-<tr data-platform="tiktok">
+<tr data-platform="tiktok" class="highlight">
   <td>@Wotabul903</td>
   <td>TikTok</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>4</strong></td>
 </tr>
 
 <tr data-platform="instagram">
@@ -1734,510 +1747,538 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
 <tr data-platform="facebook">
-  <td>@Teddy Bear Ngidol</td>
+  <td>Teddy Bear Ngidol</td>
   <td>Facebook</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="tiktok">
+<tr data-platform="tiktok" class="highlight">
   <td>@crottttttt4</td>
   <td>TikTok</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>3</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@AndromedaS13195</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@silaaahauskntl</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Undrcvr_JKT48</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Sakana4all</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@DuaMangkuk</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@_Yummzx48</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Nadia9867</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@bimbukanbimo</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Bani_Nguyen</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Cintadiagonal</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@RestiGinaAyudia</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Elseblakkeju</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Patrickstars69</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@jasuke_xjix</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Amenara21046</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@kamidii77</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Contradaily48</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@SawaiMalam</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@rrrifqi3456</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@AkunSesat634921</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@PHandal34909</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Sangatmalass_</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@avocadoofluffy</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Rahma_Nitsuga</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@LuciaLpp78</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-suspended">Suspended</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@RimBoy313</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@petitenindya</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@PENCURI221434</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@RescueBrn</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@secret757276</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@asupanmantap098</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-suspended">Suspended</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@anakbaik1371745</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@bertaloremm</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Super_Yujii</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@gbpokemon1111</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@MachaStevanaSec</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@1nazuma</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@shitt48</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@nikmatnya48</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-suspended">Suspended</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@quntulbekbek</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@dangerareaa48</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@VarizAbdul1886</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-suspended">Suspended</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@kingcumbosv3</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-suspended">Suspended</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@penikmatindira3</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@ehn_prw</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@AnakSehat550402</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@user12023838292</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@sukacrtinfotoo</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-suspended">Suspended</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@tidmeper12436</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@girll0vers</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@kruisen361471</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-suspended">Suspended</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@satoru_get0</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@sukajeketi48_</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@48Oops</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@sounllie_</td>
   <td>X (Twitter)</td>
-  <td><span class="badge badge-kebencian">Ujaran Kebencian</span></td>
+  <td><span class="badge badge-ujaran">Ujaran Kebencian</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@Siapaaj14314134</td>
   <td>X (Twitter)</td>
-  <td><span class="badge badge-kebencian">Ujaran Kebencian</span></td>
+  <td><span class="badge badge-ujaran">Ujaran Kebencian</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
-<tr data-platform="x">
-  <td>@haiiiindah</td>
-  <td>X (Twitter)</td>
-  <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="x">
+<tr data-platform="twitter">
   <td>@SamuelPartogi28</td>
   <td>X (Twitter)</td>
   <td><span class="badge badge-ancaman">Ancaman</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="x">
-  <td>@MLahap</td>
-  <td>X (Twitter)</td>
-  <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="x">
-  <td>@wotaakalsehat</td>
-  <td>X (Twitter)</td>
-  <td><span class="badge badge-kebencian">Ujaran Kebencian</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="x">
-  <td>@sakannasan</td>
-  <td>X (Twitter)</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="telegram">
@@ -2246,6 +2287,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -2254,38 +2296,7 @@ tbody tr:hover{
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@riiz_wan2</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="x">
-  <td>@itskindavieny</td>
-  <td>X / Twitter</td>
-  <td><span class="badge badge-lain">Lainnya</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="telegram">
-  <td>@Kevvipp</td>
-  <td>Telegram</td>
-  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
-</tr>
-
-<tr data-platform="tiktok">
-  <td>@user5684525073228</td>
-  <td>TikTok</td>
-  <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
-  <td class="status status-aktif">Aktif</td>
-  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="instagram">
@@ -2294,6 +2305,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
 <tr data-platform="discord">
@@ -2302,6 +2314,7 @@ tbody tr:hover{
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="threads">
@@ -2310,6 +2323,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="telegram">
@@ -2318,6 +2332,7 @@ tbody tr:hover{
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="telegram">
@@ -2326,6 +2341,7 @@ tbody tr:hover{
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="instagram">
@@ -2334,6 +2350,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="instagram">
@@ -2342,6 +2359,7 @@ tbody tr:hover{
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="instagram">
@@ -2350,6 +2368,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-nonaktif">Nonaktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -2358,6 +2377,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -2366,6 +2386,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
 <tr data-platform="instagram">
@@ -2374,6 +2395,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -2382,6 +2404,7 @@ tbody tr:hover{
   <td><span class="badge badge-pelecehan">Pelecehan</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -2390,6 +2413,7 @@ tbody tr:hover{
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>3</strong></td>
 </tr>
 
 <tr data-platform="tiktok">
@@ -2398,11 +2422,241 @@ tbody tr:hover{
   <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
   <td class="status status-aktif">Aktif</td>
   <td>Jan 2026</td>
+  <td><strong>2</strong></td>
+</tr>
+
+<tr data-platform="facebook">
+  <td>@Jkt48 Universe</td>
+  <td>Facebook</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>2</strong></td>
+</tr>
+
+<tr data-platform="facebook">
+  <td>@Delynessence Shanghai</td>
+  <td>Facebook</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>2</strong></td>
+</tr>
+
+<tr data-platform="facebook">
+  <td>@Veranda JKT48</td>
+  <td>Facebook</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>4</strong></td>
+</tr>
+
+<tr data-platform="telegram">
+  <td>@Kevvipp</td>
+  <td>Telegram</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="twitter">
+  <td>@MLahap</td>
+  <td>X (Twitter)</td>
+  <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="twitter">
+  <td>@wotaakalsehat</td>
+  <td>X (Twitter)</td>
+  <td><span class="badge badge-kebencian">Ujaran Kebencian</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="discord">
+  <td>@Rumah Darmo</td>
+  <td>Discord</td>
+  <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="threads">
+  <td>@Erine Vallencia wotabul_07</td>
+  <td>Threads</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@admin.ai3</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@b4co__</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-nonaktif">Nonaktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@bahan.crtt69</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-nonaktif">Nonaktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@bahancrtjkt48</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@begbeng.45</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="twitter">
+  <td>@haiiiindah</td>
+  <td>X (Twitter)</td>
+  <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="twitter">
+  <td>@itskindavieny</td>
+  <td>X / Twitter</td>
+  <td><span class="badge badge-lainnya">Lainnya</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@jkt48_hebat</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@jktawaw2</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@oranggbt70</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@ranyocompany.5</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@reyzzxtoya</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@riiz_wan2</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="twitter">
+  <td>@sakannasan</td>
+  <td>X (Twitter)</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@user5684525073228</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-konten">Konten Tidak Pantas</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@wong.gendeng278</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
+</tr>
+
+<tr data-platform="tiktok">
+  <td>@v2l3ncia</td>
+  <td>TikTok</td>
+  <td><span class="badge badge-pelecehan">Pelecehan</span></td>
+  <td class="status status-aktif">Aktif</td>
+  <td>Jan 2026</td>
+  <td><strong>1</strong></td>
 </tr>
 
         </tbody>
       </table>
     </div>
+
+<div id="noData" class="no-data" style="display:none;">
+  🔍 Data tidak ditemukan
+</div>
 
     <!-- 🔥 PAGINATION TARUH DI SINI -->
     <div class="pagination" id="pagination"></div>
@@ -2498,14 +2752,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateSummary() {
     let total = 0;
     let aktif = 0, nonaktif = 0, suspended = 0;
-    let x = 0, tiktok = 0, ig = 0, tg = 0, fb = 0;
+    let x = 0, tiktok = 0, ig = 0, tg = 0, fb = 0, discord = 0;
 
     rows.forEach(row => {
       if (row.style.display === "none") return;
 
       total++;
 
-      const platform = row.cells[1].innerText.toLowerCase();
+      const platformText = row.cells[1].innerText.toLowerCase();
       const status = row.cells[3].innerText.toLowerCase();
 
       // ===== STATUS =====
@@ -2514,11 +2768,12 @@ document.addEventListener("DOMContentLoaded", () => {
       else if (status.includes("suspended")) suspended++;
 
       // ===== PLATFORM =====
-      if (platform.includes("twitter")) x++;
-      else if (platform.includes("tiktok")) tiktok++;
-      else if (platform.includes("instagram")) ig++;
-      else if (platform.includes("telegram")) tg++;
-      else if (platform.includes("facebook")) fb++;
+      if (platformText.includes("twitter")) x++;
+      else if (platformText.includes("tiktok")) tiktok++;
+      else if (platformText.includes("instagram")) ig++;
+      else if (platformText.includes("telegram")) tg++;
+      else if (platformText.includes("facebook")) fb++;
+      else if (platformText.includes("discord")) discord++;
     });
 
     // ===== ISI ANGKA =====
@@ -2532,6 +2787,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sumIG.innerText = ig;
     sumTG.innerText = tg;
     sumFB.innerText = fb;
+    sumDiscord.innerText = discord;
 
     // ===== PERSENTASE =====
     perAktif.innerText = total ? ((aktif / total) * 100).toFixed(1) + "%" : "0%";
@@ -2668,6 +2924,39 @@ document.addEventListener("DOMContentLoaded", () => {
   updateSummary();
 
 });
+</script>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const platformFilter = document.getElementById("platformFilter");
+const rows = document.querySelectorAll("table tbody tr");
+const noData = document.getElementById("noData");
+
+function applyFilter() {
+  const keyword = searchInput.value.toLowerCase();
+  const platform = platformFilter.value;
+  let visibleCount = 0;
+
+  rows.forEach(row => {
+    const akun = row.cells[0].innerText.toLowerCase();
+    const rowPlatform = row.dataset.platform;
+
+    const matchSearch = akun.includes(keyword);
+    const matchPlatform = platform === "all" || rowPlatform === platform;
+
+    if (matchSearch && matchPlatform) {
+      row.style.display = "";
+      visibleCount++;
+    } else {
+      row.style.display = "none";
+    }
+  });
+
+  noData.style.display = visibleCount === 0 ? "block" : "none";
+}
+
+searchInput.addEventListener("input", applyFilter);
+platformFilter.addEventListener("change", applyFilter);
 </script>
 </body>
 </html>
