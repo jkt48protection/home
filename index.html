@@ -803,6 +803,40 @@ td:last-child strong {
   font-weight:700;
   color:#777;
 }
+
+/* ===== BUTTON DOWNLOAD ===== */
+.btn-download{
+  padding:10px 16px;
+  border-radius:10px;
+  border:none;
+  background:linear-gradient(135deg,#c62828,#b71c1c);
+  color:#fff;
+  font-weight:800;
+  font-size:14px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:.25s ease;
+  white-space:nowrap;
+}
+
+.btn-download:hover{
+  background:linear-gradient(135deg,#e53935,#c62828);
+  transform:translateY(-1px);
+}
+
+.btn-download:active{
+  transform:scale(.97);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .btn-download{
+    width:100%;
+    justify-content:center;
+  }
+}
 </style>
 </head>
 
@@ -975,8 +1009,14 @@ td:last-child strong {
 
 </div>
 
-    <!-- FILTER -->
 <div class="filter-bar">
+
+  <!-- DOWNLOAD -->
+  <button id="downloadCSV" class="btn-download">
+    ⬇️ Unduh Rekap Laporan
+  </button>
+
+  <!-- FILTER PLATFORM -->
   <select id="platformFilter">
     <option value="all">Semua Platform</option>
     <option value="x">X (Twitter)</option>
@@ -988,11 +1028,13 @@ td:last-child strong {
     <option value="discord">Discord</option>
   </select>
 
+  <!-- SEARCH -->
   <input 
     type="text" 
     id="searchInput" 
     placeholder="Cari nama akun..."
   >
+
 </div>
 
     <!-- TABLE -->
@@ -2913,6 +2955,37 @@ function applyFilter() {
 
 searchInput.addEventListener("input", applyFilter);
 platformFilter.addEventListener("change", applyFilter);
+</script>
+
+<script>
+document.getElementById("downloadCSV").addEventListener("click", function () {
+
+  const table = document.querySelector("table");
+  const rows = table.querySelectorAll("tr");
+  let csv = [];
+
+  rows.forEach(row => {
+    const cols = row.querySelectorAll("th, td");
+    let rowData = [];
+
+    cols.forEach(col => {
+      let text = col.innerText.replace(/"/g, '""').trim();
+      rowData.push(`"${text}"`);
+    });
+
+    csv.push(rowData.join(","));
+  });
+
+  const blob = new Blob([csv.join("\n")], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "arsip-akun.csv";
+  a.click();
+
+  URL.revokeObjectURL(url);
+});
 </script>
 </body>
 </html>
